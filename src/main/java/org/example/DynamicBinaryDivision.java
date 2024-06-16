@@ -58,4 +58,5 @@ public class DynamicBinaryDivision {
         }
         return index;
     }
+    int abc;
 }
