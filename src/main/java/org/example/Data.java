@@ -1,12 +1,12 @@
 package org.example;
 
 public class Data {
-    private int day;
-    private int month;
-    private int year;
+    public int day;
+    public int month;
+    public int year;
     private static final int[] ALL_MONTHS = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-    private Data (int day, int month, int year) {
+    public Data (int day, int month, int year) {
         this.day = day;
         this.year = year;
         this.month = month;
