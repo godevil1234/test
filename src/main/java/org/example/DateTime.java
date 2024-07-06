@@ -22,11 +22,8 @@ public class DateTime extends Data {
         addHours(additionalHours);
     }
     public void addHours(int additionalHours) {
-        int day = additionalHours + hours;
-        while(day >= 24) {
-            addDays(1);
-            day -= this.day;
-        }
+        int day = (additionalHours + hours) / 24;
+        addDays(day);
         hours = (additionalHours + hours) % 24;
     }
     public int getHours() {
@@ -66,7 +63,7 @@ public class DateTime extends Data {
     public static void main(String[] args) {
         DateTime dateTime = new DateTime(20,0,0,23,6,2024);
         dateTime.addDays(0);
-        dateTime.addHours(72);
+        dateTime.addHours(12);
         System.out.println(dateTime);
     }
 }

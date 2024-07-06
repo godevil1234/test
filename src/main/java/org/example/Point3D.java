@@ -7,18 +7,18 @@ public class Point3D extends Point2D {
         super(x, y);
         this.z = z;
     }
-//    @Override
-//    public double getDistance(Point2D other) {
-//        if (other instanceof Point3D other3d) {
-//            return Math.sqrt(
-//                    Math.pow(this.getX() - other.getX(), 2) +
-//                            Math.pow(this.getY() - other.getY(), 2) +
-//                            Math.pow(this.z - other3d.z, 2)
-//            );
-//        }
-//
-//        return super.getDistance(other);
-//    }
+    @Override
+    public double getDistance(Point2D other) {
+        if (other instanceof Point3D other3d) {
+            return Math.sqrt(
+                    Math.pow(this.getX() - other.getX(), 2) +
+                            Math.pow(this.getY() - other.getY(), 2) +
+                            Math.pow(this.z - other3d.z, 2)
+            );
+        }
+
+        return super.getDistance(other);
+    }
 
     public double getZ() {
         return z;
