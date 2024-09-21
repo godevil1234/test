@@ -49,7 +49,6 @@ public class Binary {
         try (BufferedInputStream stream = new BufferedInputStream(new FileInputStream("data.bin"))) {
             ArrayList<MyStudent> students1 = new ArrayList<>();
             byte[] sizeStudents1 = new byte[2];
-            short count = (short) students.size();
             short size1 = ByteBuffer.wrap(sizeStudents1).getShort();
             byte[] nameData1 = new byte[size1];
             stream.read(nameData1);
