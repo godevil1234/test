@@ -1,9 +1,10 @@
 package org.example.library;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.Scanner;
 
 public class LibraryMain {
+    public static final Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         Library library = new Library();
 
@@ -15,8 +16,9 @@ public class LibraryMain {
         library.addBook(dostoevsky);
 
         library.printBooks();
-        Reader nikita = new Reader("Nikita");
-        LocalDate mustReturnDate = LocalDate.of(2024,9,22);
-        library.takeBook("Онегин",nikita,mustReturnDate);
+
+        Reader nikita = new Reader("Никита");
+        library.takeBook("Онегин",nikita,LocalDate.of(2024,9,22));
+        library.returnBook("Онегин",nikita);
     }
 }

@@ -14,5 +14,8 @@ public class Reader {
     public void addBook(Book book) {
         listBooks.add(book);
     }
+    public String getName(){
+        return name;
+    }
 
 }
