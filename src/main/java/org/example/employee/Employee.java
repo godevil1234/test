@@ -1,15 +1,16 @@
 package org.example.employee;
 
-public abstract class Employee {
+import java.time.LocalDateTime;
+
+public abstract class Employee implements Simulated {
     private String name;
     private int timeSpent;
-
+    Boss boss;
     private Task currentTask = new Task(0);
-
-    public Employee(String name){
+    public Employee(String name, Boss boss) {
         this.name = name;
+        this.boss = boss;
     }
-    public abstract int calculatedSalary();
     public Task setTask(Task task) {
         return task;
     }
@@ -25,8 +26,8 @@ public abstract class Employee {
     public boolean haveTask(){
         return currentTask.haveDurationHours();
     }
-    public int plusToTimeSpent(int toPlus) {
-        return timeSpent += toPlus;
+    public void plusToTimeSpent(int toPlus) {
+        timeSpent += toPlus;
     }
     public void setCurrentTask(Task currentTask) {
         this.currentTask = currentTask;
@@ -34,4 +35,5 @@ public abstract class Employee {
     public int getTimeSpent() {
         return timeSpent;
     }
+
 }
