@@ -2,7 +2,7 @@ package org.example.employee;
 
 import java.util.ArrayList;
 
-public class Boss implements Simulated {
+public class Boss implements Simulated, FinishedTaskListener {
     private final ArrayList<Employee> employees = new ArrayList<>();
 
     private final ArrayList<Task> toDoList = new ArrayList<>();
@@ -21,19 +21,13 @@ public class Boss implements Simulated {
          return employee;
     }
     @Override
-    public void nextHour(int numberHours) {
+    public void nextHour(DateTime dateTime) {
         for(Employee employee : employees){
-            employee.nextHour(numberHours);
-            employee.plusToTimeSpent(numberHours);
-        }
-        dateTime.plusHour(numberHours);
-    }
-    public void showSalary() {
-        for(Employee employee : employees){
-            System.out.println("Сотрудник: " + employee.getName());
-            System.out.println("Зарплата: ");
+            employee.nextHour(dateTime);
+            employee.plusToTimeSpent(1);
         }
     }
+
     public boolean haveFreeEmployee() {
         for (Employee employee : employees) {
             if(!employee.haveTask()) {
@@ -65,11 +59,24 @@ public class Boss implements Simulated {
     }
     public void giveTaskFromToDoList(Employee employee){
         if (!toDoList.isEmpty()){
+            System.out.println("Выдаю задачу " + employee.getName());
             employee.setTask(toDoList.getFirst());
-        }else System.out.println("Список отложенных задач пуст");
+        }
+        else System.out.println("Список отложенных задач пуст");
     }
     public void setDateTime(DateTime dateTime) {
         this.dateTime = dateTime;
     }
 
+    @Override
+    public void onEmployeeFinishedTask(Employee employee) {
+        giveTaskFromToDoList(employee);
+    }
+    public void showSalary() {{
+            for(Employee employee : employees) {
+                System.out.println("Сотрудник: " + employee.getName());
+                System.out.println("Зарплата: " + employee.calculatedSalary());
+            }
+        }
+    }
 }

@@ -1,15 +1,19 @@
 package org.example.employee;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Employee implements Simulated {
     private String name;
     private int timeSpent;
-    Boss boss;
     private Task currentTask = new Task(0);
-    public Employee(String name, Boss boss) {
+    private List<FinishedTaskListener> listeners = new ArrayList<>();
+    void addListeners(FinishedTaskListener listener){
+        this.listeners.add(listener);
+    }
+    public Employee(String name) {
         this.name = name;
-        this.boss = boss;
     }
     public Task setTask(Task task) {
         return task;
@@ -23,6 +27,7 @@ public abstract class Employee implements Simulated {
     public Task getCurrentTask() {
         return currentTask;
     }
+    public abstract int calculatedSalary();
     public boolean haveTask(){
         return currentTask.haveDurationHours();
     }
@@ -34,6 +39,11 @@ public abstract class Employee implements Simulated {
     }
     public int getTimeSpent() {
         return timeSpent;
+    }
+    public void reportTaskListener(){
+        for(FinishedTaskListener listener : listeners){
+            listener.onEmployeeFinishedTask(this);
+        }
     }
 
 }

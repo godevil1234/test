@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class Contractor extends Employee {
     private final int paymentForHour;
-    public Contractor(String name, Boss boss, int paymentForHour) {
-        super(name,boss);
+    public Contractor(String name,int paymentForHour) {
+        super(name);
         this.paymentForHour = paymentForHour;
     }
 
@@ -16,22 +16,28 @@ public class Contractor extends Employee {
     }
 
     @Override
-    public void nextHour(int number) {
+    public void nextHour(DateTime dateTime) {
         if (haveTask()){
-            if (!boss.getDateTime().dayOff()){
-                getCurrentTask().minusHour(number);
-                plusToTimeSpent(number);
-            }else if (desire()){
-                getCurrentTask().minusHour(number);
-                plusToTimeSpent(number);
-            }else System.out.println("Работник отдыхает");
+            if (dateTime.dayOff()){
+                getCurrentTask().minusHour(1);
+                plusToTimeSpent(1);
+                System.out.println(getName() + " Отрабатывает " + getCurrentTask().getDuration() + " ч.");
+            } else if (desire()){
+                getCurrentTask().minusHour(1);
+                plusToTimeSpent(1);
+                System.out.println(getName() + " Решил поработать в выходной " + getCurrentTask().getDuration() + " ч.");
+            }else System.out.println(getName() + " отдыхает");
         }
         if (isFree()){
-            boss.giveTaskFromToDoList(this);
+            reportTaskListener();
+        }
+        if(dateTime.getDayOfMonth() == dateTime.getSizeMonth()) {
+            calculatedSalary();
         }
     }
-    public int getPaymentForHour() {
-        return paymentForHour;
+    @Override
+    public int calculatedSalary(){
+        return paymentForHour * getTimeSpent();
     }
 
 }

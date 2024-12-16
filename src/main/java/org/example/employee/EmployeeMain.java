@@ -6,24 +6,27 @@ public class EmployeeMain {
         DateTime dateTime = new DateTime(LocalDateTime.now());
         Boss boss = new Boss(dateTime);
 
-        Contractor boris = new Contractor("Contractor", boss,250);
+        LocalDateTime dateTimeFinish = dateTime.getDateTime().plusMonths(3);
+
+        Contractor boris = new Contractor("Борис",250);
         boss.addEmployee(boris);
+        boris.addListeners(boss);
 
-        Contractor maksim = new Contractor("Contractor", boss,250);
+        Contractor maksim = new Contractor("Максим",250);
         boss.addEmployee(maksim);
+        maksim.addListeners(boss);
 
-        HiredEmployee gosha = new HiredEmployee("Hired", boss,40000);
+        HiredEmployee gosha = new HiredEmployee("Гоша",40000);
         boss.addEmployee(gosha);
+        gosha.addListeners(boss);
 
-        for (int i = 0 ; i <= 100; i++) {
-            boss.nextHour(1);
+        while (dateTime.getDateTime().isBefore(dateTimeFinish)) {
+            dateTime.showDateTime();
             Task task = Task.createRandomTask();
             boss.giveTask(task);
-        }
-        while (dateTime.getDateTime().isBefore(dateTime.getDateTime().plusMonths(3))) {
-            boss.giveTaskFromToDoList(boris);
-            boss.nextHour(1);
+            boss.nextHour(dateTime);
             dateTime.plusHour(1);
+            System.out.println("--------------");
         }
         boss.showSalary();
     }

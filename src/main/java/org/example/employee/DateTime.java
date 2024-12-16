@@ -2,9 +2,10 @@ package org.example.employee;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DateTime {
-    LocalDateTime dateTime;
+    private LocalDateTime dateTime;
     public DateTime(LocalDateTime dateTime){
         this.dateTime = dateTime;
     }
@@ -20,8 +21,15 @@ public class DateTime {
     public LocalDateTime getDateTime() {
         return dateTime;
     }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void showDateTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = dateTime.format(formatter);
+        System.out.println("Дата и время: " + formattedDate);
+    }
+    public int getSizeMonth(){
+        return dateTime.toLocalDate().lengthOfMonth();
+    }
+    public int getDayOfMonth(){
+        return dateTime.getDayOfMonth();
     }
 }

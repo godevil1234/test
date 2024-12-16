@@ -14,7 +14,7 @@ public class Task {
     }
     public static Task createRandomTask(){
         Random random = new Random();
-        Task task = new Task(random.nextInt(1,8));
+        Task task = new Task(random.nextInt(1,12));
         return task;
     }
     public boolean haveDurationHours(){
